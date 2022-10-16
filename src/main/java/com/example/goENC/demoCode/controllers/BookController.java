@@ -46,4 +46,14 @@ public class BookController {
     public Integer deleteBook(@PathVariable int id) {
         return bookService.deleteBook(id);
     }
+
+    // 테스트용임
+    @PostMapping("/hello")
+    public Integer addBook(@RequestBody BookAddRequestDto[] requestDto) {
+        for(int i=0;i<requestDto.length;i++){
+            System.out.println(requestDto[i].getTitle());
+        }
+
+        return 1;
+    }
 }
