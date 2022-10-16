@@ -3,19 +3,20 @@ package com.example.goENC.dto.survey.createSurvey;
 import com.example.goENC.models.Question;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
-public class QuestionDto {
+public class RequestQuestionDto {
     private String questionTitle;
     private Integer questionOrder;
     private Integer questionType;
     private boolean[] questionOptions;
-    private List<AnswerDto> questionAnswers;
+    private List<RequestAnswerDto> questionAnswers;
 
-    public QuestionDto(String questionTitle, Integer questionOrder, Integer questionType, boolean[] questionOptions, List<AnswerDto> questionAnswers) {
+    public RequestQuestionDto(String questionTitle, Integer questionOrder, Integer questionType, boolean[] questionOptions, List<RequestAnswerDto> questionAnswers) {
         this.questionTitle = questionTitle;
         this.questionOrder = questionOrder;
         this.questionType = questionType;
@@ -23,7 +24,7 @@ public class QuestionDto {
         this.questionAnswers = questionAnswers;
     }
 
-    public QuestionDto(String questionTitle, Integer questionOrder, Integer questionType, boolean[] questionOptions) {
+    public RequestQuestionDto(String questionTitle, Integer questionOrder, Integer questionType, boolean[] questionOptions) {
         this.questionTitle = questionTitle;
         this.questionOrder = questionOrder;
         this.questionType = questionType;

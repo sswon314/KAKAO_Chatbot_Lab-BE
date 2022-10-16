@@ -6,17 +6,17 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class AnswerDto {
+public class RequestAnswerDto {
 
     private Integer order;
     private String value;
 
-    public AnswerDto(Integer order, String value){
-        this.order=order;
-        this.value=value;
+    public RequestAnswerDto(Integer order, String value) {
+        this.order = order;
+        this.value = value;
     }
 
-    public ChoiceAnswer toChoiceAnswerEntity(Integer questionId){
+    public ChoiceAnswer toChoiceAnswerEntity(Integer questionId) {
         return ChoiceAnswer.builder()
                 .questionId(questionId)
                 .answerOrder(order)

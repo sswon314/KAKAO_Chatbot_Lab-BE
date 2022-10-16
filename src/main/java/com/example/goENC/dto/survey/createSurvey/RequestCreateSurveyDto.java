@@ -9,12 +9,13 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class RequestCreateSurveyDto {
+
     private Integer userId = null;
     private String surveyTitle = null;
     private String surveyContent = null;
-    private List<QuestionDto> questionCardList = null;
+    private List<RequestQuestionDto> questionCardList = null;
 
-    public RequestCreateSurveyDto(Integer userId, String surveyTitle, String surveyContent, List<QuestionDto> questionCardList) {
+    public RequestCreateSurveyDto(Integer userId, String surveyTitle, String surveyContent, List<RequestQuestionDto> questionCardList) {
         this.userId = userId;
         this.surveyTitle = surveyTitle;
         this.surveyContent = surveyContent;
