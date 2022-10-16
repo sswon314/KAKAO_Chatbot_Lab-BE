@@ -1,4 +1,4 @@
-package com.example.goENC.dto.survey;
+package com.example.goENC.dto.survey.createSurvey;
 
 import com.example.goENC.models.Question;
 import lombok.Getter;
@@ -8,15 +8,14 @@ import java.util.List;
 
 @Getter
 @NoArgsConstructor
-public class QuestionList {
+public class QuestionDto {
     private String questionTitle;
     private Integer questionOrder;
     private Integer questionType;
     private boolean[] questionOptions;
-    private String[] questionAnswers;
+    private List<AnswerDto> questionAnswers;
 
-    public QuestionList(String questionTitle, Integer questionOrder, Integer questionType, boolean[] questionOptions, String[] questionAnswers) {
-        System.out.println("1");
+    public QuestionDto(String questionTitle, Integer questionOrder, Integer questionType, boolean[] questionOptions, List<AnswerDto> questionAnswers) {
         this.questionTitle = questionTitle;
         this.questionOrder = questionOrder;
         this.questionType = questionType;
@@ -24,17 +23,18 @@ public class QuestionList {
         this.questionAnswers = questionAnswers;
     }
 
-    public QuestionList(String questionTitle, Integer questionOrder, Integer questionType, boolean[] questionOptions) {
-        System.out.println("2");
+    public QuestionDto(String questionTitle, Integer questionOrder, Integer questionType, boolean[] questionOptions) {
         this.questionTitle = questionTitle;
         this.questionOrder = questionOrder;
         this.questionType = questionType;
         this.questionOptions = questionOptions;
     }
 
-    public Question toQuestionEntity() {
+
+    public Question toQuestionEntity(Integer surveyId) {
         if (this.questionType == 1) {
             return Question.builder()
+                    .surveyId(surveyId)
                     .questionTitle(questionTitle)
                     .questionOrder(questionOrder)
                     .questionType(questionType)
@@ -45,6 +45,7 @@ public class QuestionList {
         } else {
             return Question.builder()
                     .questionTitle(questionTitle)
+                    .surveyId(surveyId)
                     .questionOrder(questionOrder)
                     .questionType(questionType)
                     .isRequire(questionOptions[0])

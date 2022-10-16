@@ -39,8 +39,7 @@ public class Question {
 
     // 객관식 질문
     @Builder
-    public Question(Integer questionId, Integer surveyId, Integer questionOrder, String questionTitle, Integer questionType, boolean isRequire, boolean isDuplicate, boolean isMix) {
-        this.questionId = questionId;
+    public Question(Integer surveyId, Integer questionOrder, String questionTitle, Integer questionType, boolean isRequire, boolean isDuplicate, boolean isMix) {
         this.surveyId = surveyId;
         this.questionOrder = questionOrder;
         this.questionTitle = questionTitle;
@@ -52,8 +51,7 @@ public class Question {
 
     // 주관식 질문
     @Builder
-    public Question(Integer questionId, Integer surveyId, Integer questionOrder, String questionTitle, Integer questionType, boolean isRequire) {
-        this.questionId = questionId;
+    public Question(Integer surveyId, Integer questionOrder, String questionTitle, Integer questionType, boolean isRequire) {
         this.surveyId = surveyId;
         this.questionOrder = questionOrder;
         this.questionTitle = questionTitle;

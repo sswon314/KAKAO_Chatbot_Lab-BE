@@ -1,7 +1,5 @@
-package com.example.goENC.dto.survey;
+package com.example.goENC.dto.survey.createSurvey;
 
-import com.example.goENC.demoCode.models.Book;
-import com.example.goENC.models.Question;
 import com.example.goENC.models.Survey;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,9 +12,9 @@ public class RequestCreateSurveyDto {
     private Integer userId = null;
     private String surveyTitle = null;
     private String surveyContent = null;
-    private List<QuestionList> questionCardList = null;
+    private List<QuestionDto> questionCardList = null;
 
-    public RequestCreateSurveyDto(Integer userId, String surveyTitle, String surveyContent, List<QuestionList> questionCardList) {
+    public RequestCreateSurveyDto(Integer userId, String surveyTitle, String surveyContent, List<QuestionDto> questionCardList) {
         this.userId = userId;
         this.surveyTitle = surveyTitle;
         this.surveyContent = surveyContent;

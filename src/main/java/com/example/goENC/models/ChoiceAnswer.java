@@ -30,8 +30,7 @@ public class ChoiceAnswer {
 
     // 객관식 질문
     @Builder
-    public ChoiceAnswer(Integer answerId, Integer questionId, Integer answerOrder, String answerContent) {
-        this.answerId = answerId;
+    public ChoiceAnswer(Integer questionId, Integer answerOrder, String answerContent) {
         this.questionId = questionId;
         this.answerOrder = answerOrder;
         this.answerContent = answerContent;

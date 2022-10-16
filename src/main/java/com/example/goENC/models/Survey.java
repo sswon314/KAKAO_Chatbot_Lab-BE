@@ -39,8 +39,7 @@ public class Survey {
     private String surveyUrl;
 
     @Builder
-    public Survey(Integer surveyId, Integer userId, String surveyTitle, String surveyDescription) {
-        this.surveyId = surveyId;
+    public Survey(Integer userId, String surveyTitle, String surveyDescription) {
         this.userId = userId;
         this.surveyTitle = surveyTitle;
         this.surveyDescription = surveyDescription;
