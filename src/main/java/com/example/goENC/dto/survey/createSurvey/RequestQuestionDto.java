@@ -1,6 +1,7 @@
 package com.example.goENC.dto.survey.createSurvey;
 
 import com.example.goENC.models.Question;
+import com.example.goENC.models.Survey;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,23 +17,8 @@ public class RequestQuestionDto {
     private boolean[] questionOptions;
     private List<RequestAnswerDto> questionAnswers;
 
-    public RequestQuestionDto(String questionTitle, Integer questionOrder, Integer questionType, boolean[] questionOptions, List<RequestAnswerDto> questionAnswers) {
-        this.questionTitle = questionTitle;
-        this.questionOrder = questionOrder;
-        this.questionType = questionType;
-        this.questionOptions = questionOptions;
-        this.questionAnswers = questionAnswers;
-    }
 
-    public RequestQuestionDto(String questionTitle, Integer questionOrder, Integer questionType, boolean[] questionOptions) {
-        this.questionTitle = questionTitle;
-        this.questionOrder = questionOrder;
-        this.questionType = questionType;
-        this.questionOptions = questionOptions;
-    }
-
-
-    public Question toQuestionEntity(Integer surveyId) {
+    public Question toQuestionEntity(Survey surveyId) {
         if (this.questionType == 1) {
             return Question.builder()
                     .surveyId(surveyId)

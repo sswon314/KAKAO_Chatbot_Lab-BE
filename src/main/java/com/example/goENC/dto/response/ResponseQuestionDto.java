@@ -1,6 +1,7 @@
 package com.example.goENC.dto.response;
 
 import com.example.goENC.models.Question;
+import com.example.goENC.models.Survey;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,7 +33,7 @@ public class ResponseQuestionDto {
     }
 
 
-    public Question toQuestionEntity(Integer surveyId) {
+    public Question toQuestionEntity(Survey surveyId) {
         if (this.questionType == 1) {
             return Question.builder()
                     .surveyId(surveyId)

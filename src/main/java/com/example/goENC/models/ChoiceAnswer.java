@@ -19,8 +19,10 @@ public class ChoiceAnswer {
     @Column(name = "answer_id", nullable = false)
     private Integer answerId;
 
+    @ManyToOne
     @JoinColumn(name = "question_id")
-    private Integer questionId;
+    private Question questionId;
+    // private Integer questionId;
 
     @Column(name = "answer_order")
     private Integer answerOrder;
@@ -30,8 +32,8 @@ public class ChoiceAnswer {
 
     // 객관식 질문
     @Builder
-    public ChoiceAnswer(Integer questionId, Integer answerOrder, String answerContent) {
-        this.questionId = questionId;
+    public ChoiceAnswer(Question questionId, Integer answerOrder, String answerContent) {
+        this.questionId=questionId;
         this.answerOrder = answerOrder;
         this.answerContent = answerContent;
     }

@@ -1,6 +1,7 @@
 package com.example.goENC.dto.survey.createSurvey;
 
 import com.example.goENC.models.ChoiceAnswer;
+import com.example.goENC.models.Question;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +17,7 @@ public class RequestAnswerDto {
         this.value = value;
     }
 
-    public ChoiceAnswer toChoiceAnswerEntity(Integer questionId) {
+    public ChoiceAnswer toChoiceAnswerEntity(Question questionId) {
         return ChoiceAnswer.builder()
                 .questionId(questionId)
                 .answerOrder(order)
