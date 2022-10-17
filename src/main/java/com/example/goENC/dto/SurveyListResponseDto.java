@@ -18,7 +18,7 @@ public class SurveyListResponseDto {
 
     public SurveyListResponseDto(Survey entity) {
         this.surveyId = entity.getSurveyId();
-        this.userId = entity.getUserId();
+        this.userId = entity.getUserId().getUserId();
         this.surveyTitle = entity.getSurveyTitle();
         this.surveyDescription = entity.getSurveyDescription();
         this.surveyStart = entity.getSurveyStart();

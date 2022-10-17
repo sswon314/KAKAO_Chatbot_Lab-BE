@@ -8,7 +8,6 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "choice_answer")
 @NoArgsConstructor
@@ -16,11 +15,13 @@ public class ChoiceAnswer {
 
     @Id  // Primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // SQL에서 auto_increment 의미
-    @Column(name = "answer_id", nullable = false)
-    private Integer answerId;
+    @Column(name = "choice_answer_id", nullable = false)
+    private Integer choiceAnswerId;
 
+    @ManyToOne
     @JoinColumn(name = "question_id")
-    private Integer questionId;
+    private Question questionId;
+    // private Integer questionId;
 
     @Column(name = "answer_order")
     private Integer answerOrder;
@@ -28,9 +29,13 @@ public class ChoiceAnswer {
     @Column(name = "answer_content", length = 50)
     private String answerContent;
 
+    public ChoiceAnswer(Integer answerId) {
+        this.choiceAnswerId = answerId;
+    }
+
     // 객관식 질문
     @Builder
-    public ChoiceAnswer(Integer questionId, Integer answerOrder, String answerContent) {
+    public ChoiceAnswer(Question questionId, Integer answerOrder, String answerContent) {
         this.questionId = questionId;
         this.answerOrder = answerOrder;
         this.answerContent = answerContent;

@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "survey")
 @NoArgsConstructor
@@ -20,8 +19,10 @@ public class Survey {
     @Column(name = "survey_id", nullable = false)
     private Integer surveyId;
 
+    @ManyToOne
     @JoinColumn(name = "user_id")
-    private Integer userId;
+    private User userId;
+    // private Integer userId;
 
     @Column(name = "survey_title", length = 50)
     private String surveyTitle;
@@ -38,9 +39,13 @@ public class Survey {
     @Column(name = "survey_url", length = 100)
     private String surveyUrl;
 
+    public Survey(Integer surveyId){
+        this.surveyId=surveyId;
+    }
+
     @Builder
-    public Survey(Integer userId, String surveyTitle, String surveyDescription) {
-        this.userId = userId;
+    public Survey(User userId, String surveyTitle, String surveyDescription) {
+        this.userId=userId;
         this.surveyTitle = surveyTitle;
         this.surveyDescription = surveyDescription;
     }

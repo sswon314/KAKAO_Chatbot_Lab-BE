@@ -11,10 +11,12 @@ public class ResponseAnswerDto {
     private Integer id;
     private Integer order;
     private String value;
+    private Boolean isCheck;
 
     public ResponseAnswerDto(ChoiceAnswer choiceAnswer) {
-        this.id=choiceAnswer.getAnswerId();
+        this.id=choiceAnswer.getChoiceAnswerId();
         this.order = choiceAnswer.getAnswerOrder();
         this.value = choiceAnswer.getAnswerContent();
+        this.isCheck=false;
     }
 }

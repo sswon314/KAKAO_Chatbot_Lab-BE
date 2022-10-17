@@ -1,12 +1,13 @@
 package com.example.goENC.services;
 
 import com.example.goENC.dto.response.ResponseSurveyDto;
-import com.example.goENC.models.ChoiceAnswer;
-import com.example.goENC.models.Question;
-import com.example.goENC.models.Survey;
-import com.example.goENC.repositories.ChoiceAnswerRepository;
-import com.example.goENC.repositories.QuestionRepository;
-import com.example.goENC.repositories.SurveyRepository;
+import com.example.goENC.dto.response.RequestSubmitAnswerDto;
+import com.example.goENC.dto.response.RequestSubmitSurveyDto;
+import com.example.goENC.dto.survey.createSurvey.RequestChoiceAnswerDto;
+import com.example.goENC.dto.survey.createSurvey.RequestCreateSurveyDto;
+import com.example.goENC.dto.survey.createSurvey.RequestQuestionDto;
+import com.example.goENC.models.*;
+import com.example.goENC.repositories.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,15 @@ public class ResponseService {
     @Autowired
     ChoiceAnswerRepository choiceAnswerRepository;
 
+    @Autowired
+    ResponseRepository responseRepository;
+
+    @Autowired
+    ChoiceResponseRepository choiceResponseRepository;
+
+    @Autowired
+    SubjectiveResponseRepository subjectiveResponseRepository;
+
     @Transactional(readOnly = true)
     public ResponseSurveyDto getSurveyTemplate(Integer id) {
         // 설문id에 대한 설문 table의 정보 가져옴
@@ -47,5 +57,24 @@ public class ResponseService {
         }
 
         return new ResponseSurveyDto(survey, questionList, choiceAnswerList);
+    }
+
+    @Transactional
+    public Integer submitSurvey(RequestSubmitSurveyDto requestDto) {
+        Response responseId = responseRepository.save(requestDto.toResponseEntity());
+
+        for (RequestSubmitAnswerDto answer : requestDto.getQuestionCardList()) {
+            if (answer.getQuestionType() == 1) {
+                for(ChoiceResponse response:answer.toChoiceResponseEntity(responseId)){
+                    choiceResponseRepository.save(response);
+                }
+
+            } else {
+                subjectiveResponseRepository.save(answer.toSubjectiveResponseEntity(responseId));
+            }
+        }
+
+        // 응답 ID를 반환
+        return responseId.getResponseId();
     }
 }

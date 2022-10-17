@@ -16,8 +16,10 @@ public class Question {
     @Column(name = "question_id", nullable = false)
     private Integer questionId;
 
+    @ManyToOne
     @JoinColumn(name = "survey_id")
-    private Integer surveyId;
+    private Survey surveyId;
+    // private Integer surveyId;
 
     @Column(name = "question_order")
     private Integer questionOrder;
@@ -37,10 +39,14 @@ public class Question {
     @Column(name = "is_mix")
     private boolean isMix;
 
+    public Question(Integer questionId){
+        this.questionId=questionId;
+    }
+
     // 객관식 질문
     @Builder
-    public Question(Integer surveyId, Integer questionOrder, String questionTitle, Integer questionType, boolean isRequire, boolean isDuplicate, boolean isMix) {
-        this.surveyId = surveyId;
+    public Question(Survey surveyId, Integer questionOrder, String questionTitle, Integer questionType, boolean isRequire, boolean isDuplicate, boolean isMix) {
+        this.surveyId=surveyId;
         this.questionOrder = questionOrder;
         this.questionTitle = questionTitle;
         this.questionType = questionType;
@@ -51,8 +57,8 @@ public class Question {
 
     // 주관식 질문
     @Builder
-    public Question(Integer surveyId, Integer questionOrder, String questionTitle, Integer questionType, boolean isRequire) {
-        this.surveyId = surveyId;
+    public Question(Survey surveyId, Integer questionOrder, String questionTitle, Integer questionType, boolean isRequire) {
+        this.surveyId=surveyId;
         this.questionOrder = questionOrder;
         this.questionTitle = questionTitle;
         this.questionType = questionType;

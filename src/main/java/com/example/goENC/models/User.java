@@ -22,9 +22,15 @@ public class User {
     @Column(name = "login_info", length = 100)
     private String loginInfo;
 
+    public User(Integer userId) {
+        this.userId = userId;
+    }
+
     @Builder
     public User(Integer userId, String loginInfo) {
         this.userId = userId;
         this.loginInfo = loginInfo;
     }
+
+
 }
