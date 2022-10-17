@@ -1,7 +1,7 @@
 package com.example.goENC.services;
 
 import com.example.goENC.dto.SurveyListResponseDto;
-import com.example.goENC.dto.survey.createSurvey.RequestAnswerDto;
+import com.example.goENC.dto.survey.createSurvey.RequestChoiceAnswerDto;
 import com.example.goENC.dto.survey.createSurvey.RequestQuestionDto;
 import com.example.goENC.dto.survey.createSurvey.RequestCreateSurveyDto;
 import com.example.goENC.models.Question;
@@ -38,13 +38,15 @@ public class SurveyService {
         Survey surveyId = surveyRepository.save(requestDto.toSurveyEntity());
 
         // 질문배열 반복문 돌리면서 각 질문을 DB에 저장
+        int questionOrder=1;
         for (RequestQuestionDto question : requestDto.getQuestionCardList()) {
-            Question questionId = questionRepository.save(question.toQuestionEntity(surveyId));
+            Question questionId = questionRepository.save(question.toQuestionEntity(surveyId, questionOrder++));
 
             // 질문 유형이 객관식형이라면 답변 정보를 DB에 저장
             if (question.getQuestionType() == 1) {
-                for (RequestAnswerDto answer : question.getQuestionAnswers()) {
-                    choiceAnswerRepository.save(answer.toChoiceAnswerEntity(questionId));
+                int answerOrder=1;
+                for (RequestChoiceAnswerDto answer : question.getQuestionAnswers()) {
+                    choiceAnswerRepository.save(answer.toChoiceAnswerEntity(questionId,answerOrder++));
                 }
             }
         }

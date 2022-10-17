@@ -7,20 +7,18 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class RequestAnswerDto {
+public class RequestChoiceAnswerDto {
 
-    private Integer order;
     private String value;
 
-    public RequestAnswerDto(Integer order, String value) {
-        this.order = order;
+    public RequestChoiceAnswerDto(String value) {
         this.value = value;
     }
 
-    public ChoiceAnswer toChoiceAnswerEntity(Question questionId) {
+    public ChoiceAnswer toChoiceAnswerEntity(Question questionId,Integer answerOrder) {
         return ChoiceAnswer.builder()
                 .questionId(questionId)
-                .answerOrder(order)
+                .answerOrder(answerOrder)
                 .answerContent(value)
                 .build();
     }
