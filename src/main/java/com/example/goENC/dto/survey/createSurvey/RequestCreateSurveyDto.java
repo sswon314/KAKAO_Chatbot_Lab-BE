@@ -16,7 +16,7 @@ public class RequestCreateSurveyDto {
     private String surveyContent = null;
     private List<RequestQuestionDto> questionCardList = null;
 
-    public RequestCreateSurveyDto(Integer userId, String surveyTitle, String surveyContent, List<RequestQuestionDto> questionCardList) {
+    public RequestCreateSurveyDto(Long userId, String surveyTitle, String surveyContent, List<RequestQuestionDto> questionCardList) {
         this.userId = new User(userId);
         this.surveyTitle = surveyTitle;
         this.surveyContent = surveyContent;

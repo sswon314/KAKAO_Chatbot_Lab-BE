@@ -32,7 +32,7 @@ public class SurveyController {
 
     // 설문 유저 ID에 따라 불러오기 (select by user ID...)
     @GetMapping(value = "userId={userId}")
-    public List<SurveyListResponseDto> findAllByUserId(@PathVariable int userId) {
+    public List<SurveyListResponseDto> findAllByUserId(@PathVariable long userId) {
         return surveyService.findAllByUserId(userId);
     }
 

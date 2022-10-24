@@ -66,7 +66,7 @@ public class SurveyService {
     // 설문 유저 ID에 따라 불러오기 (select by user ID...)
     @Transactional(readOnly = true) // 트랜젝션을 읽기 전용으로 함
     @Query("SELECT * FROM SURVEY WHERE user_id = 1")
-    public List<SurveyListResponseDto> findAllByUserId(Integer userId) {
+    public List<SurveyListResponseDto> findAllByUserId(Long userId) {
         User user=new User(userId);
         return surveyRepository.findAllByUserId(user).stream()
                 .map(SurveyListResponseDto::new)

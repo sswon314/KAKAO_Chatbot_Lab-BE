@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class SurveyListResponseDto {
 
     private Integer surveyId; // 설문 ID
-    private Integer userId; // 유저 ID
+    private Long userId; // 유저 ID
     private String surveyTitle; // 설문 제목
     private String surveyDescription; // 설문 부연 설명
     private LocalDateTime surveyStart; // 설문 시작일

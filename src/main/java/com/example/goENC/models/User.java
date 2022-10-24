@@ -17,17 +17,17 @@ public class User {
     @Id  // Primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // SQL에서 auto_increment 의미
     @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    private Long userId;
 
     @Column(name = "login_info", length = 100)
     private String loginInfo;
 
-    public User(Integer userId) {
+    public User(Long userId) {
         this.userId = userId;
     }
 
     @Builder
-    public User(Integer userId, String loginInfo) {
+    public User(Long userId, String loginInfo) {
         this.userId = userId;
         this.loginInfo = loginInfo;
     }
