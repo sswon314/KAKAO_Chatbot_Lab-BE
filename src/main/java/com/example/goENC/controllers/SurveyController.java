@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RestController
 @ResponseBody
@@ -20,7 +21,6 @@ public class SurveyController {
 
     @PostMapping
     public Integer createSurvey(@RequestBody RequestCreateSurveyDto requestDto) {
-
         return surveyService.createSurvey(requestDto);
     }
 
