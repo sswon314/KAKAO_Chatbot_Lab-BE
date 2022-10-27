@@ -1,9 +1,11 @@
 package com.example.goENC.services;
 
 import com.example.goENC.dto.SurveyListResponseDto;
+import com.example.goENC.dto.response.ResponseSurveyDto;
 import com.example.goENC.dto.survey.createSurvey.RequestChoiceAnswerDto;
 import com.example.goENC.dto.survey.createSurvey.RequestQuestionDto;
 import com.example.goENC.dto.survey.createSurvey.RequestCreateSurveyDto;
+import com.example.goENC.models.ChoiceAnswer;
 import com.example.goENC.models.Question;
 import com.example.goENC.models.Survey;
 import com.example.goENC.models.User;
@@ -16,7 +18,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -38,15 +42,15 @@ public class SurveyService {
         Survey surveyId = surveyRepository.save(requestDto.toSurveyEntity());
 
         // 질문배열 반복문 돌리면서 각 질문을 DB에 저장
-        int questionOrder=1;
+        int questionOrder = 1;
         for (RequestQuestionDto question : requestDto.getQuestionCardList()) {
             Question questionId = questionRepository.save(question.toQuestionEntity(surveyId, questionOrder++));
 
             // 질문 유형이 객관식형이라면 답변 정보를 DB에 저장
             if (question.getQuestionType() == 1) {
-                int answerOrder=1;
+                int answerOrder = 1;
                 for (RequestChoiceAnswerDto answer : question.getQuestionAnswers()) {
-                    choiceAnswerRepository.save(answer.toChoiceAnswerEntity(questionId,answerOrder++));
+                    choiceAnswerRepository.save(answer.toChoiceAnswerEntity(questionId, answerOrder++));
                 }
             }
         }
@@ -67,7 +71,7 @@ public class SurveyService {
     @Transactional(readOnly = true) // 트랜젝션을 읽기 전용으로 함
     @Query("SELECT * FROM SURVEY WHERE user_id = 1")
     public List<SurveyListResponseDto> findAllByUserId(Long userId) {
-        User user=new User(userId);
+        User user = new User(userId);
         return surveyRepository.findAllByUserId(user).stream()
                 .map(SurveyListResponseDto::new)
                 .collect(Collectors.toList());
@@ -77,7 +81,7 @@ public class SurveyService {
     @Transactional(readOnly = true)
     @Query("SELECT * FROM SURVEY WHERE user_id = 1")
     public SurveyListResponseDto findBySurveyId(Integer surveyId) {
-        Survey survey=new Survey(surveyId);
+        Survey survey = new Survey(surveyId);
         return new SurveyListResponseDto(surveyRepository.findBySurveyId(survey));
     }
 }
