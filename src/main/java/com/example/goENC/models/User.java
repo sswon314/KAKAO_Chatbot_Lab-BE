@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -15,21 +16,33 @@ import javax.persistence.*;
 public class User {
 
     @Id  // Primary key
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // SQL에서 auto_increment 의미
     @Column(name = "user_id", nullable = false)
     private Long userId;
 
-    @Column(name = "login_info", length = 100)
-    private String loginInfo;
+    @Column(name = "nick_name", length = 50)
+    private String nickName;
+
+    @Column(name = "profile_img", length = 200)
+    private String profileImg;
+
+    @Column(name = "email", length = 100)
+    private String eMail;
+
+    @Column(name = "join_date")
+    private LocalDateTime joinDate;
+
 
     public User(Long userId) {
         this.userId = userId;
     }
 
     @Builder
-    public User(Long userId, String loginInfo) {
+    public User(Long userId, String nickName, String profileImg, String eMail, LocalDateTime joinDate) {
         this.userId = userId;
-        this.loginInfo = loginInfo;
+        this.nickName = nickName;
+        this.profileImg = profileImg;
+        this.eMail = eMail;
+        this.joinDate = joinDate;
     }
 
 
