@@ -1,6 +1,7 @@
 package com.example.goENC.controllers;
 
 import com.example.goENC.dto.SurveyListResponseDto;
+import com.example.goENC.dto.SurveyUpdateDto;
 import com.example.goENC.dto.survey.createSurvey.RequestCreateSurveyDto;
 import com.example.goENC.services.SurveyService;
 import lombok.RequiredArgsConstructor;
@@ -36,9 +37,15 @@ public class SurveyController {
         return surveyService.findAllByUserId(userId);
     }
 
-    // 설문 ID에 따라 불러오기 (select by survey ID)
-    @GetMapping(value = "surveyId={surveyId}")
-    public SurveyListResponseDto findBySurveyId(@PathVariable int surveyId) {
-        return surveyService.findBySurveyId(surveyId);
+    // 설문 ID와 유저 ID에 따라 불러오기
+    @GetMapping(value = "surveyId={userId}/{surveyId}")
+    public SurveyListResponseDto findBySurveyId(@PathVariable("userId") long userId, @PathVariable("surveyId") int surveyId) {
+        return surveyService.findBySurveyId(userId, surveyId);
+    }
+
+    @PutMapping(value = "/updateSurvey/{userId}/{surveyId}/")
+    public SurveyListResponseDto updateSurvey(@PathVariable("userId") long userId, @PathVariable("surveyId") int surveyId,
+                                              @RequestBody SurveyUpdateDto surveyUpdateDto) {
+        return surveyService.updateSurvey(userId, surveyId, surveyUpdateDto);
     }
 }

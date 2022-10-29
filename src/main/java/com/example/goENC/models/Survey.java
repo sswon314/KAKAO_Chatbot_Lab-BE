@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Getter
 @Entity
@@ -51,10 +52,9 @@ public class Survey {
     }
 
     // 시작일 종료일 설정시 링크 생성
-    public void updateSurvey(LocalDateTime surveyStart, LocalDateTime surveyEnd) {
+    public void updateSurvey(LocalDateTime surveyStart, LocalDateTime surveyEnd, String surveyUrl) {
         this.surveyStart = surveyStart;
         this.surveyEnd = surveyEnd;
-
-        this.surveyUrl = "localhost:3000/response/" + surveyId;
+        this.surveyUrl = surveyUrl;
     }
 }
