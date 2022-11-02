@@ -1,5 +1,6 @@
 package com.example.goENC.services;
 
+import com.example.goENC.demoCode.models.Book;
 import com.example.goENC.dto.SurveyListResponseDto;
 import com.example.goENC.dto.SurveyUpdateDto;
 import com.example.goENC.dto.response.ResponseSurveyDto;
@@ -109,9 +110,17 @@ public class SurveyService {
     @Transactional
     @Query("DELETE FROM survey WHERE survey_id = {surveyId}")
     public Integer deleteFindBySurveyId(Integer surveyId) {
-        // Survey survey = surveyRepository.findSurveyBySurveyId(surveyId);
-        // surveyRepository.delete(survey);
-        return 1; //surveyId;
+        Survey survey = surveyRepository.findSurveyBySurveyId(surveyId);
+        List<Question> questionList = questionRepository.findQuestionList(surveyId);
+        for (Question question : questionList) {
+            List<ChoiceAnswer> choiceAnswerList = choiceAnswerRepository.findAnswerList(question.getQuestionId());
+            for (ChoiceAnswer choiceAnswer : choiceAnswerList){
+                choiceAnswerRepository.delete(choiceAnswer);
+            }
+            questionRepository.delete(question);
+        }
+        surveyRepository.delete(survey);
+        return surveyId;
     }
 
     @Transactional
