@@ -39,16 +39,16 @@ public class SurveyController {
         return surveyService.findAllByUserId(userId);
     }
 
-    // 설문 ID와 유저 ID에 따라 불러오기
-    @GetMapping(value = "surveyId={userId}/{surveyId}")
-    public SurveyListResponseDto findBySurveyId(@PathVariable("userId") long userId, @PathVariable("surveyId") int surveyId) {
-        return surveyService.findBySurveyId(userId, surveyId);
+    // 설문 ID에 따라 불러오기
+    @GetMapping(value = "surveyId={surveyId}")
+    public SurveyListResponseDto findBySurveyId(@PathVariable("surveyId") int surveyId) {
+        return surveyService.findBySurveyId(surveyId);
     }
 
-    @PutMapping(value = "/updateSurvey/{userId}/{surveyId}/")
-    public SurveyListResponseDto updateSurvey(@PathVariable("userId") long userId, @PathVariable("surveyId") int surveyId,
-                                              @RequestBody SurveyUpdateDto surveyUpdateDto) {
-        return surveyService.updateSurvey(userId, surveyId, surveyUpdateDto);
+    // 설문 정보 업데이트하기
+    @PutMapping(value = "/updateSurvey/surveyId={surveyId}")
+    public SurveyListResponseDto updateSurvey(@PathVariable("surveyId") int surveyId, @RequestBody SurveyUpdateDto surveyUpdateDto) {
+        return surveyService.updateSurvey(surveyId, surveyUpdateDto);
     }
 
     @PutMapping(value = "/copy/surveyId={originSurveyId}")

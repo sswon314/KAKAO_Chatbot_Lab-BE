@@ -1,9 +1,7 @@
 package com.example.goENC.services;
 
-import com.example.goENC.demoCode.models.Book;
 import com.example.goENC.dto.SurveyListResponseDto;
 import com.example.goENC.dto.SurveyUpdateDto;
-import com.example.goENC.dto.response.ResponseSurveyDto;
 import com.example.goENC.dto.survey.createSurvey.RequestChoiceAnswerDto;
 import com.example.goENC.dto.survey.createSurvey.RequestQuestionDto;
 import com.example.goENC.dto.survey.createSurvey.RequestCreateSurveyDto;
@@ -14,14 +12,11 @@ import com.example.goENC.models.User;
 import com.example.goENC.repositories.ChoiceAnswerRepository;
 import com.example.goENC.repositories.QuestionRepository;
 import com.example.goENC.repositories.SurveyRepository;
-import com.example.goENC.repositories.SurveySingleRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,9 +29,6 @@ public class SurveyService {
 
     @Autowired
     SurveyRepository surveyRepository;
-
-
-    SurveySingleRepository surveySingleRepository;
 
     @Autowired
     QuestionRepository questionRepository;
@@ -87,23 +79,16 @@ public class SurveyService {
 
     // 설문 ID와 유저 ID에 따라 불러오기 (select by survey ID)
     @Transactional(readOnly = true)
-    public SurveyListResponseDto findBySurveyId(Long userId, Integer surveyId) {
-        User user = new User(userId);
-        Survey survey = new Survey(surveyId);
-        return new SurveyListResponseDto(surveySingleRepository.findBySurveyId(user, survey));
+    public SurveyListResponseDto findBySurveyId(Integer surveyId) {
+        return new SurveyListResponseDto(surveyRepository.findSurveyBySurveyId(surveyId));
     }
 
     // 설문 업데이트
     @Transactional
-    public SurveyListResponseDto updateSurvey(Long userId, Integer surveyId,
-                                              SurveyUpdateDto surveyUpdateDto) {
-        User user = new User(userId);
-        Survey surveyCheck = new Survey(surveyId);
-
-        Survey survey = surveySingleRepository.findBySurveyId(user, surveyCheck);
+    public SurveyListResponseDto updateSurvey(Integer surveyId, SurveyUpdateDto surveyUpdateDto) {
+        Survey survey = surveyRepository.findSurveyBySurveyId(surveyId);
         survey.updateSurvey(surveyUpdateDto.getSurveyStart(),
                 surveyUpdateDto.getSurveyEnd(), surveyUpdateDto.getSurveyUrl());
-
         return null;
     }
 
