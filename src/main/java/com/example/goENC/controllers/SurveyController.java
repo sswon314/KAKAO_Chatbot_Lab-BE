@@ -47,4 +47,10 @@ public class SurveyController {
                                               @RequestBody SurveyUpdateDto surveyUpdateDto) {
         return surveyService.updateSurvey(userId, surveyId, surveyUpdateDto);
     }
+
+    @PutMapping(value = "/copy/surveyId={originSurveyId}")
+    public Integer copyBySurveyId(@PathVariable Integer originSurveyId) {
+        return surveyService.copyBySurveyId(originSurveyId);
+    }
+
 }

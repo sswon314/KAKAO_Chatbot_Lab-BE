@@ -15,6 +15,7 @@ import com.example.goENC.repositories.QuestionRepository;
 import com.example.goENC.repositories.SurveyRepository;
 import com.example.goENC.repositories.SurveySingleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
@@ -94,7 +95,7 @@ public class SurveyService {
     // 설문 업데이트
     @Transactional
     public SurveyListResponseDto updateSurvey(Long userId, Integer surveyId,
-                                SurveyUpdateDto surveyUpdateDto) {
+                                              SurveyUpdateDto surveyUpdateDto) {
         User user = new User(userId);
         Survey surveyCheck = new Survey(surveyId);
 
@@ -103,5 +104,53 @@ public class SurveyService {
                 surveyUpdateDto.getSurveyEnd(), surveyUpdateDto.getSurveyUrl());
 
         return null;
+    }
+
+    @Transactional
+    @Query("DELETE FROM survey WHERE survey_id = {surveyId}")
+    public Integer deleteFindBySurveyId(Integer surveyId) {
+        // Survey survey = surveyRepository.findSurveyBySurveyId(surveyId);
+        // surveyRepository.delete(survey);
+        return 1; //surveyId;
+    }
+
+    @Transactional
+    public Integer copyBySurveyId(Integer originSurveyId) {
+        // 설문 DB 에서 설문정보(by survey_id)를 받아온 후 설문 복제
+        Survey originSurvey = surveyRepository.findSurveyBySurveyId(originSurveyId);
+        Survey newSurvey = new Survey(originSurvey.getUserId(), originSurvey.getSurveyTitle(), originSurvey.getSurveyDescription());
+        newSurvey = surveyRepository.save(newSurvey);
+
+        // 질문 DB 에서 질문정보(by survey_id)를 받아온 후 질문 복제
+        List<Question> originQuestionList = questionRepository.findQuestionList(originSurveyId);
+
+        for (Question originQuestion : originQuestionList) {
+            // map <원래 아이디, 새로 생성한 questionID)
+            Map<Integer, Question> newQuestionListMap = new HashMap<>();
+            Question newQuestion = new Question(
+                    newSurvey,
+                    originQuestion.getQuestionOrder(),
+                    originQuestion.getQuestionTitle(),
+                    originQuestion.getQuestionType(),
+                    originQuestion.isRequire(),
+                    originQuestion.isDuplicate(),
+                    originQuestion.isMix()
+            );
+            newQuestionListMap.put(originQuestion.getQuestionId(), questionRepository.save(newQuestion));
+
+            // 만약 객관식형이라면
+            if (originQuestion.getQuestionType() == 1) {
+                // 객관식유형 DB 에서 객관식유형정보(by question_id)를 받아온 후 질문 복제
+                List<ChoiceAnswer> originChoiceAnswerList = choiceAnswerRepository.findAnswerList(originQuestion.getQuestionId());
+                for (ChoiceAnswer originChoiceAnswer : originChoiceAnswerList) {
+                    ChoiceAnswer newChoiceAnswer = new ChoiceAnswer(
+                            newQuestionListMap.get(originQuestion.getQuestionId()), originChoiceAnswer.getAnswerOrder(), originChoiceAnswer.getAnswerContent()
+                    );
+                    choiceAnswerRepository.save(newChoiceAnswer);
+                }
+            }
+        }
+        // 설문 ID를 반환
+        return newSurvey.getSurveyId();
     }
 }
