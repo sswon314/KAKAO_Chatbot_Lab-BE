@@ -27,41 +27,37 @@ public class SurveyController {
         return surveyService.createSurvey(requestDto);
     }
 
-    @GetMapping
+    // 설문 전체 불러오기 (select *)
+    @GetMapping(value = "/surveys")
     public List<SurveyListResponseDto> findAllSurveys() {
         return surveyService.findAll();
     }
 
     // 설문 유저 ID에 따라 불러오기 (select by user ID...)
-    @GetMapping(value = "/user/{user-id}")
-    public List<SurveyListResponseDto> findAllByUserId(@PathVariable Long userId) {
+    @GetMapping(value = "userId={userId}")
+    public List<SurveyListResponseDto> findAllByUserId(@PathVariable long userId) {
         return surveyService.findAllByUserId(userId);
     }
 
     // 설문 ID에 따라 불러오기
-    @GetMapping(value = "/{survey-id}")
-    public SurveyListResponseDto findBySurveyId(@PathVariable Integer surveyId) {
+    @GetMapping(value = "surveyId={surveyId}")
+    public SurveyListResponseDto findBySurveyId(@PathVariable("surveyId") int surveyId) {
         return surveyService.findBySurveyId(surveyId);
     }
 
     // 설문 정보 업데이트하기
-    @PutMapping(value = "/{survey-id}/meta")
-    public SurveyListResponseDto updateSurvey(@PathVariable Integer surveyId, @RequestBody SurveyUpdateDto surveyUpdateDto) {
+    @PutMapping(value = "/updateSurvey/surveyId={surveyId}")
+    public SurveyListResponseDto updateSurvey(@PathVariable("surveyId") int surveyId, @RequestBody SurveyUpdateDto surveyUpdateDto) {
         return surveyService.updateSurvey(surveyId, surveyUpdateDto);
     }
 
-    @PutMapping(value = "/{survey-id}/duplicate")
-    public Integer copyBySurveyId(@PathVariable Integer surveyId) {
-        return surveyService.copyBySurveyId(surveyId);
+    @PutMapping(value = "/copy/surveyId={originSurveyId}")
+    public Integer copyBySurveyId(@PathVariable Integer originSurveyId) {
+        return surveyService.copyBySurveyId(originSurveyId);
     }
 
-    @PutMapping(value = "/{survey-id}/template")
-    public Integer updateSurveyTemplate(@PathVariable Integer surveyId, @RequestBody RequestCreateSurveyDto requestDto) {
-        return 1;
-    }
-
-    @DeleteMapping
-    public Integer deleteFindBySurveyId(@PathVariable Integer surveyId) {
+    @DeleteMapping(value = "/surveyId={surveyId}")
+    public Integer deleteFindBySurveyId(@PathVariable Integer surveyId){
         return surveyService.deleteFindBySurveyId(surveyId);
     }
 }
