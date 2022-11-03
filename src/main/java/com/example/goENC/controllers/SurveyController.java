@@ -27,33 +27,37 @@ public class SurveyController {
         return surveyService.createSurvey(requestDto);
     }
 
-    // 설문 전체 불러오기 (select *)
     @GetMapping
     public List<SurveyListResponseDto> findAllSurveys() {
         return surveyService.findAll();
     }
 
     // 설문 유저 ID에 따라 불러오기 (select by user ID...)
-    @GetMapping
-    public List<SurveyListResponseDto> findAllByUserId(@RequestParam(name = "user-id") Long userId) {
+    @GetMapping(value = "/user/{user-id}")
+    public List<SurveyListResponseDto> findAllByUserId(@PathVariable Long userId) {
         return surveyService.findAllByUserId(userId);
     }
 
     // 설문 ID에 따라 불러오기
-    @GetMapping
-    public SurveyListResponseDto findBySurveyId(@RequestParam(name = "survey-id") Integer surveyId) {
+    @GetMapping(value = "/{survey-id}")
+    public SurveyListResponseDto findBySurveyId(@PathVariable Integer surveyId) {
         return surveyService.findBySurveyId(surveyId);
     }
 
     // 설문 정보 업데이트하기
-    @PutMapping
-    public SurveyListResponseDto updateSurvey(@RequestParam(name = "survey-id") Integer surveyId, @RequestBody SurveyUpdateDto surveyUpdateDto) {
+    @PutMapping(value = "/{survey-id}/meta")
+    public SurveyListResponseDto updateSurvey(@PathVariable Integer surveyId, @RequestBody SurveyUpdateDto surveyUpdateDto) {
         return surveyService.updateSurvey(surveyId, surveyUpdateDto);
     }
 
-    @PutMapping
-    public Integer copyBySurveyId(@RequestParam(name = "origin-id") Integer originSurveyId) {
-        return surveyService.copyBySurveyId(originSurveyId);
+    @PutMapping(value = "/{survey-id}/duplicate")
+    public Integer copyBySurveyId(@PathVariable Integer surveyId) {
+        return surveyService.copyBySurveyId(surveyId);
+    }
+
+    @PutMapping(value = "/{survey-id}/template")
+    public Integer updateSurveyTemplate(@PathVariable Integer surveyId, @RequestBody RequestCreateSurveyDto requestDto) {
+        return 1;
     }
 
     @DeleteMapping
