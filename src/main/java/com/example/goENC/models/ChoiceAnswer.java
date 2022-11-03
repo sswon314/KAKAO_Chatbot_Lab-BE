@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -20,6 +22,7 @@ public class ChoiceAnswer {
 
     @ManyToOne
     @JoinColumn(name = "question_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Question questionId;
     // private Integer questionId;
 

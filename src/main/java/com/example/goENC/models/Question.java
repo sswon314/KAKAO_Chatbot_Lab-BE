@@ -1,6 +1,8 @@
 package com.example.goENC.models;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -18,6 +20,7 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "survey_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Survey surveyId;
     // private Integer surveyId;
 

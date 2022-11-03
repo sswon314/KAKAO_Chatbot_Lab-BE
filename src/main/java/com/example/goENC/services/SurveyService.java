@@ -96,14 +96,6 @@ public class SurveyService {
     @Query("DELETE FROM survey WHERE survey_id = {surveyId}")
     public Integer deleteFindBySurveyId(Integer surveyId) {
         Survey survey = surveyRepository.findSurveyBySurveyId(surveyId);
-        List<Question> questionList = questionRepository.findQuestionList(surveyId);
-        for (Question question : questionList) {
-            List<ChoiceAnswer> choiceAnswerList = choiceAnswerRepository.findAnswerList(question.getQuestionId());
-            for (ChoiceAnswer choiceAnswer : choiceAnswerList){
-                choiceAnswerRepository.delete(choiceAnswer);
-            }
-            questionRepository.delete(question);
-        }
         surveyRepository.delete(survey);
         return surveyId;
     }

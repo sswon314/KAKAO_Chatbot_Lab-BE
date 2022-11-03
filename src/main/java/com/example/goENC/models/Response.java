@@ -5,6 +5,8 @@ import com.example.goENC.dto.response.resultSurvey.StatisticSubjectiveDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -70,6 +72,7 @@ public class Response {
 
     @ManyToOne
     @JoinColumn(name = "survey_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Survey surveyId;
 
     @Column(name = "response_time")

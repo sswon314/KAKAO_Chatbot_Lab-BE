@@ -4,6 +4,8 @@ import com.example.goENC.models.compositeKey.SubjectiveResponseId;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -17,11 +19,13 @@ public class SubjectiveResponse {
     @Id  // Primary key
     @ManyToOne
     @JoinColumn(name = "question_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Question questionId;
 
     @Id  // Primary key
     @ManyToOne
     @JoinColumn(name = "response_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Response responseId;
 
     @Column(name = "subjective_answer", length = 100)
