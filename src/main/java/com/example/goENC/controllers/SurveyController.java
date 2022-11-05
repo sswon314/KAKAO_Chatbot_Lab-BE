@@ -3,6 +3,7 @@ package com.example.goENC.controllers;
 import com.example.goENC.dto.SurveyListResponseDto;
 import com.example.goENC.dto.SurveyUpdateDto;
 import com.example.goENC.dto.survey.createSurvey.RequestCreateSurveyDto;
+import com.example.goENC.dto.survey.reviseSurvey.RequestReviseSurveyDto;
 import com.example.goENC.models.Survey;
 import com.example.goENC.services.SurveyService;
 import lombok.RequiredArgsConstructor;
@@ -56,11 +57,11 @@ public class SurveyController {
     }
 
     @PutMapping(value = "/{surveyId}/template")
-    public Integer updateSurveyTemplate(@PathVariable Integer surveyId, @RequestBody RequestCreateSurveyDto requestDto) {
-        return 1;
+    public Integer reviseSurvey(@PathVariable Integer surveyId, @RequestBody RequestReviseSurveyDto requestDto) {
+        return surveyService.reviseSurvey(surveyId, requestDto);
     }
 
-    @DeleteMapping(value="/{surveyId}")
+    @DeleteMapping(value = "/{surveyId}")
     public Integer deleteFindBySurveyId(@PathVariable Integer surveyId) {
         return surveyService.deleteFindBySurveyId(surveyId);
     }
