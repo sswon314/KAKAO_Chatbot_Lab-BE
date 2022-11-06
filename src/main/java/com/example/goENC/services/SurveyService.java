@@ -1,10 +1,13 @@
 package com.example.goENC.services;
 
+import com.example.goENC.demoCode.dto.book.BookUpdateRequestDto;
+import com.example.goENC.demoCode.models.Book;
 import com.example.goENC.dto.SurveyListResponseDto;
 import com.example.goENC.dto.SurveyUpdateDto;
 import com.example.goENC.dto.survey.createSurvey.RequestChoiceAnswerDto;
 import com.example.goENC.dto.survey.createSurvey.RequestQuestionDto;
 import com.example.goENC.dto.survey.createSurvey.RequestCreateSurveyDto;
+import com.example.goENC.dto.survey.reviseSurvey.RequestReviseSurveyDto;
 import com.example.goENC.models.ChoiceAnswer;
 import com.example.goENC.models.Question;
 import com.example.goENC.models.Survey;
@@ -138,5 +141,32 @@ public class SurveyService {
         }
         // 설문 ID를 반환
         return newSurvey.getSurveyId();
+    }
+
+    @Transactional
+    // 매개변수로 받은 surveyId값으로 DB에서 알맞는 Survey를 찾은 후
+    // 매개변수로 받은 RequestReviseSurveyDto객체로 업데이트한다 그후 성공 시 해당 id값을 반환
+    public Integer reviseSurvey(Integer surveyId, RequestReviseSurveyDto requestDto) {
+        Survey survey = surveyRepository.findById(surveyId).orElseThrow(() -> new IllegalArgumentException("해당 설문이 없습니다. id=" + surveyId));
+        survey.update(requestDto.getSurveyTitle(), requestDto.getSurveyContent());
+
+        // 설문id에 해당하는 질문정보를 지우고 requestDto의 질문리스트로 새로 생성
+        questionRepository.deleteQuestions(survey.getSurveyId());
+
+        // 질문배열 반복문 돌리면서 각 질문을 DB에 저장
+        int questionOrder = 1;
+        for (RequestQuestionDto question : requestDto.getQuestionCardList()) {
+            Question questionId = questionRepository.save(question.toQuestionEntity(survey, questionOrder++));
+
+            // 질문 유형이 객관식형이라면 답변 정보를 DB에 저장
+            if (question.getQuestionType() == 1) {
+                int answerOrder = 1;
+                for (RequestChoiceAnswerDto answer : question.getQuestionAnswers()) {
+                    choiceAnswerRepository.save(answer.toChoiceAnswerEntity(questionId, answerOrder++));
+                }
+            }
+        }
+
+        return survey.getSurveyId();
     }
 }

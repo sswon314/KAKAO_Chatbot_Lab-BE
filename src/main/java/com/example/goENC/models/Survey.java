@@ -43,13 +43,13 @@ public class Survey {
     @Column(name = "survey_url", length = 100)
     private String surveyUrl;
 
-    public Survey(Integer surveyId){
-        this.surveyId=surveyId;
+    public Survey(Integer surveyId) {
+        this.surveyId = surveyId;
     }
 
     @Builder
     public Survey(User userId, String surveyTitle, String surveyDescription) {
-        this.userId=userId;
+        this.userId = userId;
         this.surveyTitle = surveyTitle;
         this.surveyDescription = surveyDescription;
     }
@@ -59,5 +59,10 @@ public class Survey {
         this.surveyStart = surveyStart;
         this.surveyEnd = surveyEnd;
         this.surveyUrl = surveyUrl;
+    }
+
+    public void update(String newTitle, String newContent) {
+        this.surveyTitle = newTitle;
+        this.surveyDescription = newContent;
     }
 }
