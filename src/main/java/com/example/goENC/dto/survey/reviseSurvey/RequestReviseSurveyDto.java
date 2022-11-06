@@ -1,8 +1,6 @@
 package com.example.goENC.dto.survey.reviseSurvey;
 
-import com.example.goENC.dto.survey.createSurvey.RequestChoiceAnswerDto;
 import com.example.goENC.dto.survey.createSurvey.RequestQuestionDto;
-import com.example.goENC.models.Survey;
 import com.example.goENC.models.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

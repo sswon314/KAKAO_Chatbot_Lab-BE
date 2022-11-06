@@ -4,12 +4,9 @@ import com.example.goENC.dto.SurveyListResponseDto;
 import com.example.goENC.dto.SurveyUpdateDto;
 import com.example.goENC.dto.survey.createSurvey.RequestCreateSurveyDto;
 import com.example.goENC.dto.survey.reviseSurvey.RequestReviseSurveyDto;
-import com.example.goENC.models.Survey;
 import com.example.goENC.services.SurveyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

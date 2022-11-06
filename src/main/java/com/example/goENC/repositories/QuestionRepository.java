@@ -1,7 +1,6 @@
 package com.example.goENC.repositories;
 
 import com.example.goENC.models.Question;
-import com.example.goENC.models.Survey;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
