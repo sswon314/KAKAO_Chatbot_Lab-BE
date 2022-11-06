@@ -19,4 +19,7 @@ public interface SurveyRepository extends JpaRepository<Survey, Integer> {
     List<Survey> findAllByUserId(User userId);
 
     Survey findSurveyBySurveyId(Integer surveyId);
+
+    @Query(value = "select * from survey where survey_id=:id", nativeQuery = true)
+    Survey findUserBySurveyId(@Param("id") Integer id);
 }

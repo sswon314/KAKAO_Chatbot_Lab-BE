@@ -169,4 +169,12 @@ public class SurveyService {
 
         return survey.getSurveyId();
     }
+
+    @Transactional
+    // 설문지 ID를 통해 설문지를 만든 유저ID를 가져옴
+    public Long getUserBySurvey(Integer surveyId){
+        Survey survey= surveyRepository.findUserBySurveyId(surveyId);
+
+        return survey.getUserId().getUserId();
+    }
 }
