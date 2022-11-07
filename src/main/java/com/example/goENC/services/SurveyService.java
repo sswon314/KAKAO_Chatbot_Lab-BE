@@ -1,7 +1,5 @@
 package com.example.goENC.services;
 
-import com.example.goENC.demoCode.dto.book.BookUpdateRequestDto;
-import com.example.goENC.demoCode.models.Book;
 import com.example.goENC.dto.SurveyListResponseDto;
 import com.example.goENC.dto.SurveyUpdateDto;
 import com.example.goENC.dto.survey.createSurvey.RequestChoiceAnswerDto;
@@ -40,7 +38,7 @@ public class SurveyService {
     ChoiceAnswerRepository choiceAnswerRepository;
 
     @Transactional
-    public Integer createSurvey(RequestCreateSurveyDto requestDto) {
+    public Long createSurvey(RequestCreateSurveyDto requestDto) {
         // 설문 DB에 저장 후 생성된 설문ID를 받아옴
         Survey surveyId = surveyRepository.save(requestDto.toSurveyEntity());
 
@@ -82,13 +80,13 @@ public class SurveyService {
 
     // 설문 ID와 유저 ID에 따라 불러오기 (select by survey ID)
     @Transactional(readOnly = true)
-    public SurveyListResponseDto findBySurveyId(Integer surveyId) {
+    public SurveyListResponseDto findBySurveyId(Long surveyId) {
         return new SurveyListResponseDto(surveyRepository.findSurveyBySurveyId(surveyId));
     }
 
     // 설문 업데이트
     @Transactional
-    public SurveyListResponseDto updateSurvey(Integer surveyId, SurveyUpdateDto surveyUpdateDto) {
+    public SurveyListResponseDto updateSurvey(Long surveyId, SurveyUpdateDto surveyUpdateDto) {
         Survey survey = surveyRepository.findSurveyBySurveyId(surveyId);
         survey.updateSurvey(surveyUpdateDto.getSurveyStart(),
                 surveyUpdateDto.getSurveyEnd(), surveyUpdateDto.getSurveyUrl());
@@ -97,14 +95,14 @@ public class SurveyService {
 
     @Transactional
     @Query("DELETE FROM survey WHERE survey_id = {surveyId}")
-    public Integer deleteFindBySurveyId(Integer surveyId) {
+    public Long deleteFindBySurveyId(Long surveyId) {
         Survey survey = surveyRepository.findSurveyBySurveyId(surveyId);
         surveyRepository.delete(survey);
         return surveyId;
     }
 
     @Transactional
-    public Integer copyBySurveyId(Integer originSurveyId) {
+    public Long copyBySurveyId(Long originSurveyId) {
         // 설문 DB 에서 설문정보(by survey_id)를 받아온 후 설문 복제
         Survey originSurvey = surveyRepository.findSurveyBySurveyId(originSurveyId);
         Survey newSurvey = new Survey(originSurvey.getUserId(), originSurvey.getSurveyTitle(), originSurvey.getSurveyDescription());
@@ -115,7 +113,7 @@ public class SurveyService {
 
         for (Question originQuestion : originQuestionList) {
             // map <원래 아이디, 새로 생성한 questionID)
-            Map<Integer, Question> newQuestionListMap = new HashMap<>();
+            Map<Long, Question> newQuestionListMap = new HashMap<>();
             Question newQuestion = new Question(
                     newSurvey,
                     originQuestion.getQuestionOrder(),
@@ -146,7 +144,7 @@ public class SurveyService {
     @Transactional
     // 매개변수로 받은 surveyId값으로 DB에서 알맞는 Survey를 찾은 후
     // 매개변수로 받은 RequestReviseSurveyDto객체로 업데이트한다 그후 성공 시 해당 id값을 반환
-    public Integer reviseSurvey(Integer surveyId, RequestReviseSurveyDto requestDto) {
+    public Long reviseSurvey(Long surveyId, RequestReviseSurveyDto requestDto) {
         Survey survey = surveyRepository.findById(surveyId).orElseThrow(() -> new IllegalArgumentException("해당 설문이 없습니다. id=" + surveyId));
         survey.update(requestDto.getSurveyTitle(), requestDto.getSurveyContent());
 
@@ -172,7 +170,7 @@ public class SurveyService {
 
     @Transactional
     // 설문지 ID를 통해 설문지를 만든 유저ID를 가져옴
-    public Long getUserBySurvey(Integer surveyId){
+    public Long getUserBySurvey(Long surveyId){
         Survey survey= surveyRepository.findUserBySurveyId(surveyId);
 
         return survey.getUserId().getUserId();

@@ -10,15 +10,15 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ResponseRepository extends JpaRepository<Response, Integer> {
+public interface ResponseRepository extends JpaRepository<Response, Long> {
 
 
     @Query(value = "select * from question where survey_id=:id", nativeQuery = true)
-    List<Question> findQuestionList(@Param("id") Integer id);
+    List<Question> findQuestionList(@Param("id") Long id);
 
     @Query(name="find_statistic_choice_dto", nativeQuery = true)
-    List<StatisticChoiceDto> findStatisticChoice(@Param("id") Integer id);
+    List<StatisticChoiceDto> findStatisticChoice(@Param("id") Long id);
 
     @Query(name="find_statistic_subjective_dto", nativeQuery = true)
-    List<StatisticSubjectiveDto> findStatisticSubjective(@Param("id") Integer id);
+    List<StatisticSubjectiveDto> findStatisticSubjective(@Param("id") Long id);
 }

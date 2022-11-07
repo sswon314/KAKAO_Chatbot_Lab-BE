@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Getter
 public class SurveyListResponseDto {
 
-    private Integer surveyId; // 설문 ID
+    private Long surveyId; // 설문 ID
     private Long userId; // 유저 ID
     private String surveyTitle; // 설문 제목
     private String surveyDescription; // 설문 부연 설명

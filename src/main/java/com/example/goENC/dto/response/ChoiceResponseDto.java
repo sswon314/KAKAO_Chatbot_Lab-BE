@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ChoiceResponseDto {
 
-    private Integer id;
+    private Long id;
     private Integer order;
     private String value;
     private Boolean isCheck;
 
-    public ChoiceResponseDto(Integer id, Integer order, String value, Boolean isCheck) {
+    public ChoiceResponseDto(Long id, Integer order, String value, Boolean isCheck) {
         this.id = id;
         this.order = order;
         this.value = value;

@@ -18,18 +18,18 @@ public class ResponseController {
     private final ResponseService responseService;
 
     @GetMapping("/{surveyId}")
-    public ResponseSurveyDto getSurveyTemplate(@PathVariable Integer surveyId) {
+    public ResponseSurveyDto getSurveyTemplate(@PathVariable Long surveyId) {
         return responseService.getSurveyTemplate(surveyId);
     }
 
     @PostMapping
-    public Integer submitSurvey(@RequestBody RequestSubmitSurveyDto requestDto) {
+    public Long submitSurvey(@RequestBody RequestSubmitSurveyDto requestDto) {
         return responseService.submitSurvey(requestDto);
     }
 
     //     설문 ID에 따라 응답 통계 불러오기
     @GetMapping("/statistic/{surveyId}")
-    public SurveyStatisticDto getSurveyStatistic(@PathVariable Integer surveyId) {
+    public SurveyStatisticDto getSurveyStatistic(@PathVariable Long surveyId) {
         return responseService.getSurveyStatistic(surveyId);
     }
 }

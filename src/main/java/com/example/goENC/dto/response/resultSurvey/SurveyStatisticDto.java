@@ -19,7 +19,7 @@ public class SurveyStatisticDto {
     // select response.survey_id, choice_response.question_id, choice_answer_id, count(*) from response join choice_response on response.response_id=choice_response.response_id where survey_id=8 and question_id=23 group by choice_answer_id;
     // select response.survey_id, response.response_id, subjective_response.subjective_answer from response join subjective_response on response.response_id=subjective_response.response_id where survey_id=8;
 
-    private Integer surveyId;
+    private Long surveyId;
     private String surveyTitle;
     private String surveyContent;
     private SurveyTime surveyTime;
@@ -42,7 +42,6 @@ public class SurveyStatisticDto {
         }
 
         for (StatisticSubjectiveDto subjectiveDto : statisticSubjectiveDtoList) {
-            // 여기서부터 시작해야함 : 저거 두개 dto로 surveyStatisticDto로 만들어야 함
             if (this.surveyStatistic.isEmpty() || this.surveyStatistic.get(this.surveyStatistic.size() - 1).getQuestionId() != subjectiveDto.getQuestionId()) {
                 this.surveyStatistic.add(new StatisticListDto(subjectiveDto));
             } else {

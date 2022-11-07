@@ -7,14 +7,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StatisticSubjectiveDto {
 
-    private Integer surveyId;
-    private Integer questionId;
+    private Long surveyId;
+    private Long questionId;
     private Integer questionOrder;
     private Integer questionType;
     private String questionTitle;
     private String answerContent;
 
-    public StatisticSubjectiveDto(Integer survey_id,Integer question_id, Integer question_order, Integer question_type, String question_title, String subjective_answer){
+    public StatisticSubjectiveDto(Long survey_id,Long question_id, Integer question_order, Integer question_type, String question_title, String subjective_answer){
         this.surveyId=survey_id;
         this.questionId=question_id;
         this.questionOrder=question_order;

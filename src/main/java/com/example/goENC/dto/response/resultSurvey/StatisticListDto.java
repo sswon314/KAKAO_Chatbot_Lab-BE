@@ -14,7 +14,7 @@ public class StatisticListDto implements Comparable<StatisticListDto> {
     // 5.1 객관식{questionId, questionOrder, type, title, answers[{answerId, answerOrder, value, cnt}]}
     // 5.2 주관식{questionId, questionOrder, type, title, answers[{value}]
 
-    private Integer questionId;
+    private Long questionId;
     private Integer questionOrder;
     private Integer type;
     private String title;
@@ -60,12 +60,12 @@ public class StatisticListDto implements Comparable<StatisticListDto> {
     @Getter
     @NoArgsConstructor
     private class Answer implements Comparable<Answer>{
-        private Integer answerId;
+        private Long answerId;
         private Integer answerOrder;
         private String value;
         private Integer cnt;
 
-        public Answer(Integer answerId, Integer answerOrder, String value, Integer cnt) {
+        public Answer(Long answerId, Integer answerOrder, String value, Integer cnt) {
             this.answerId = answerId;
             this.answerOrder = answerOrder;
             this.value = value;
