@@ -18,7 +18,7 @@ public class Survey {
     @Id  // Primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // SQL에서 auto_increment 의미
     @Column(name = "survey_id", nullable = false)
-    private Integer surveyId;
+    private Long surveyId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -41,7 +41,7 @@ public class Survey {
     @Column(name = "survey_url", length = 100)
     private String surveyUrl;
 
-    public Survey(Integer surveyId) {
+    public Survey(Long surveyId) {
         this.surveyId = surveyId;
     }
 

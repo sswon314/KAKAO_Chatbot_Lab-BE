@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class ResponseQuestionDto {
-    private Integer questionId;
+    private Long questionId;
     private String questionTitle;
     private Integer questionOrder;
     private Integer questionType;

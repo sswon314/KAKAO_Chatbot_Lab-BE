@@ -12,7 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChoiceResponseId implements Serializable {
-    private Integer questionId;
-    private Integer responseId;
-    private Integer choiceAnswerId;
+    private Long questionId;
+    private Long responseId;
+    private Long choiceAnswerId;
 }

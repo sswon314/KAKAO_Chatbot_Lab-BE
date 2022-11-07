@@ -16,7 +16,7 @@ public class Question {
     @Id  // Primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // SQL에서 auto_increment 의미
     @Column(name = "question_id", nullable = false)
-    private Integer questionId;
+    private Long questionId;
 
     @ManyToOne
     @JoinColumn(name = "survey_id")
@@ -42,7 +42,7 @@ public class Question {
     @Column(name = "is_mix")
     private boolean isMix;
 
-    public Question(Integer questionId){
+    public Question(Long questionId){
         this.questionId=questionId;
     }
 

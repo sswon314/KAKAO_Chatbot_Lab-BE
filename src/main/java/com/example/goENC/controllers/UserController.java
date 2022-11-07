@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/survey/{surveyId}")
-    public Long getUserBySurvey(@PathVariable Integer surveyId){
+    public Long getUserBySurvey(@PathVariable Long surveyId){
         return surveyService.getUserBySurvey(surveyId);
     }
 }

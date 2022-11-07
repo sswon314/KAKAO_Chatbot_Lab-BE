@@ -18,7 +18,7 @@ public class RequestSubmitSurveyDto {
     private String surveyContent = null;
     private List<RequestSubmitAnswerDto> questionCardList = null;
 
-    public RequestSubmitSurveyDto(Integer surveyId, String surveyTitle, String surveyContent, List<RequestSubmitAnswerDto> questionCardList) {
+    public RequestSubmitSurveyDto(Long surveyId, String surveyTitle, String surveyContent, List<RequestSubmitAnswerDto> questionCardList) {
         this.surveyId = new Survey(surveyId);
         this.surveyTitle = surveyTitle;
         this.surveyContent = surveyContent;

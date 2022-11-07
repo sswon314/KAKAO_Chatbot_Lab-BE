@@ -12,6 +12,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubjectiveResponseId implements Serializable {
-    private Integer questionId;
-    private Integer responseId;
+    private Long questionId;
+    private Long responseId;
 }

@@ -14,12 +14,12 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class ResponseSurveyDto {
 
-    private Integer surveyId = null;
+    private Long surveyId = null;
     private String surveyTitle = null;
     private String surveyContent = null;
     private List<ResponseQuestionDto> questionCardList = null;
 
-    public ResponseSurveyDto(Survey survey, List<Question> questionCardList, Map<Integer, List<ChoiceAnswer>> choiceAnswerList) {
+    public ResponseSurveyDto(Survey survey, List<Question> questionCardList, Map<Long, List<ChoiceAnswer>> choiceAnswerList) {
         this.surveyId = survey.getSurveyId();
         this.surveyTitle = survey.getSurveyTitle();
         this.surveyContent = survey.getSurveyDescription();

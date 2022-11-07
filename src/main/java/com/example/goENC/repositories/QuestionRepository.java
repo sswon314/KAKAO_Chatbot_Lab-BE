@@ -8,12 +8,12 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface QuestionRepository extends JpaRepository<Question, Integer> {
+public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     @Query(value = "select * from question where survey_id=:id", nativeQuery = true)
-    List<Question> findQuestionList(@Param("id") Integer id);
+    List<Question> findQuestionList(@Param("id") Long id);
 
     @Modifying
     @Query(value="delete from question where survey_id=:id", nativeQuery = true)
-    void deleteQuestions(@Param("id") Integer id);
+    void deleteQuestions(@Param("id") Long id);
 }
