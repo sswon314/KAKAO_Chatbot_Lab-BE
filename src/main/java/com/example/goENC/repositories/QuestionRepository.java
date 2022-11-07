@@ -14,6 +14,6 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
     List<Question> findQuestionList(@Param("id") Integer id);
 
     @Modifying
-    @Query(value="delete from Question as q where q.survey_id=:id", nativeQuery = true)
+    @Query(value="delete from question where survey_id=:id", nativeQuery = true)
     void deleteQuestions(@Param("id") Integer id);
 }
