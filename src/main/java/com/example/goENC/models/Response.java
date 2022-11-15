@@ -26,12 +26,12 @@ import java.time.LocalDateTime;
         classes = @ConstructorResult(
                 targetClass = StatisticChoiceDto.class,
                 columns = {
-                        @ColumnResult(name = "survey_id", type = Integer.class),
-                        @ColumnResult(name = "question_id", type = Integer.class),
+                        @ColumnResult(name = "survey_id", type = Long.class),
+                        @ColumnResult(name = "question_id", type = Long.class),
                         @ColumnResult(name = "question_order", type = Integer.class),
                         @ColumnResult(name = "question_type", type = Integer.class),
                         @ColumnResult(name = "question_title", type = String.class),
-                        @ColumnResult(name = "choice_answer_id", type = Integer.class),
+                        @ColumnResult(name = "choice_answer_id", type = Long.class),
                         @ColumnResult(name = "answer_order", type = Integer.class),
                         @ColumnResult(name = "answer_content", type = String.class),
                         @ColumnResult(name = "cnt", type = Integer.class),
@@ -51,8 +51,8 @@ import java.time.LocalDateTime;
         classes = @ConstructorResult(
                 targetClass = StatisticSubjectiveDto.class,
                 columns = {
-                        @ColumnResult(name = "survey_id", type = Integer.class),
-                        @ColumnResult(name = "question_id", type = Integer.class),
+                        @ColumnResult(name = "survey_id", type = Long.class),
+                        @ColumnResult(name = "question_id", type = Long.class),
                         @ColumnResult(name = "question_order", type = Integer.class),
                         @ColumnResult(name = "question_type", type = Integer.class),
                         @ColumnResult(name = "question_title", type = String.class),
@@ -68,7 +68,7 @@ public class Response {
     @Id  // Primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // SQL에서 auto_increment 의미
     @Column(name = "response_id", nullable = false)
-    private Integer responseId;
+    private Long responseId;
 
     @ManyToOne
     @JoinColumn(name = "survey_id")
@@ -78,7 +78,7 @@ public class Response {
     @Column(name = "response_time")
     private LocalDateTime responseTime;
 
-    public Response(Integer responseId){
+    public Response(Long responseId){
         this.responseId=responseId;
     }
 

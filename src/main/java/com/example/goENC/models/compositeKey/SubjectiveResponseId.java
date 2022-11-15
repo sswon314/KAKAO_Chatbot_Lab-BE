@@ -1,7 +1,5 @@
 package com.example.goENC.models.compositeKey;
 
-import com.example.goENC.models.Question;
-import com.example.goENC.models.Response;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +12,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubjectiveResponseId implements Serializable {
-    private Integer questionId;
-    private Integer responseId;
+    private Long questionId;
+    private Long responseId;
 }

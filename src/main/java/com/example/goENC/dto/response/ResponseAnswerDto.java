@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResponseAnswerDto {
 
-    private Integer id;
+    private Long id;
     private Integer order;
     private String value;
     private Boolean isCheck;

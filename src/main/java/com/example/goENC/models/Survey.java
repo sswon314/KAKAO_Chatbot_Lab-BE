@@ -3,13 +3,11 @@ package com.example.goENC.models;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Getter
 @Entity
@@ -20,7 +18,7 @@ public class Survey {
     @Id  // Primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // SQL에서 auto_increment 의미
     @Column(name = "survey_id", nullable = false)
-    private Integer surveyId;
+    private Long surveyId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -43,7 +41,7 @@ public class Survey {
     @Column(name = "survey_url", length = 100)
     private String surveyUrl;
 
-    public Survey(Integer surveyId) {
+    public Survey(Long surveyId) {
         this.surveyId = surveyId;
     }
 

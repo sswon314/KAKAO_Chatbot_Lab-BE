@@ -3,7 +3,6 @@ package com.example.goENC.models;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -18,7 +17,7 @@ public class ChoiceAnswer {
     @Id  // Primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY)  // SQL에서 auto_increment 의미
     @Column(name = "choice_answer_id", nullable = false)
-    private Integer choiceAnswerId;
+    private Long choiceAnswerId;
 
     @ManyToOne
     @JoinColumn(name = "question_id")
@@ -32,7 +31,7 @@ public class ChoiceAnswer {
     @Column(name = "answer_content", length = 50)
     private String answerContent;
 
-    public ChoiceAnswer(Integer answerId) {
+    public ChoiceAnswer(Long answerId) {
         this.choiceAnswerId = answerId;
     }
 

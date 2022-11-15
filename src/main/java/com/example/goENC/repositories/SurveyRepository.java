@@ -12,11 +12,14 @@ import java.util.List;
 
 @Repository
 @EnableJpaRepositories
-public interface SurveyRepository extends JpaRepository<Survey, Integer> {
+public interface SurveyRepository extends JpaRepository<Survey, Long> {
     @Override
     List<Survey> findAll();
 
     List<Survey> findAllByUserId(User userId);
 
-    Survey findSurveyBySurveyId(Integer surveyId);
+    Survey findSurveyBySurveyId(Long surveyId);
+
+    @Query(value = "select * from survey where survey_id=:id", nativeQuery = true)
+    Survey findUserBySurveyId(@Param("id") Long id);
 }

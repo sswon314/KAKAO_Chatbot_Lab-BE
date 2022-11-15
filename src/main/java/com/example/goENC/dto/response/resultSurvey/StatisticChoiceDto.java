@@ -7,17 +7,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StatisticChoiceDto {
 
-    private Integer surveyId;
-    private Integer questionId;
+    private Long surveyId;
+    private Long questionId;
     private Integer questionOrder;
     private Integer questionType;
     private String questionTitle;
-    private Integer choiceAnswerId;
+    private Long choiceAnswerId;
     private Integer answerOrder;
     private String answerContent;
     private Integer cnt;
 
-    public StatisticChoiceDto(Integer survey_id, Integer question_id, Integer question_order, Integer question_type, String question_title, Integer choice_answer_id, Integer answer_order, String answer_content, Integer cnt){
+    public StatisticChoiceDto(Long survey_id, Long question_id, Integer question_order, Integer question_type, String question_title, Long choice_answer_id, Integer answer_order, String answer_content, Integer cnt){
         this.surveyId=survey_id;
         this.questionId=question_id;
         this.questionOrder=question_order;

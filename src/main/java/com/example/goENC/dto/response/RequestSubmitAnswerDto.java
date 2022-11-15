@@ -20,7 +20,7 @@ public class RequestSubmitAnswerDto {
     private List<ChoiceResponseDto> questionAnswers;
     private String questionAnswer;
 
-    public RequestSubmitAnswerDto(Integer questionId, Integer questionOrder, Integer questionType, String questionTitle, boolean[] questionOptions, List<ChoiceResponseDto> questionAnswers) {
+    public RequestSubmitAnswerDto(Long questionId, Integer questionOrder, Integer questionType, String questionTitle, boolean[] questionOptions, List<ChoiceResponseDto> questionAnswers) {
         this.questionId = new Question(questionId);
         this.questionOrder = questionOrder;
         this.questionType = questionType;
@@ -29,7 +29,7 @@ public class RequestSubmitAnswerDto {
         this.questionAnswers=questionAnswers;
     }
 
-    public RequestSubmitAnswerDto(Integer questionId, Integer questionOrder, Integer questionType, String questionTitle, boolean[] questionOptions, String questionAnswer) {
+    public RequestSubmitAnswerDto(Long questionId, Integer questionOrder, Integer questionType, String questionTitle, boolean[] questionOptions, String questionAnswer) {
         this.questionId = new Question(questionId);
         this.questionOrder = questionOrder;
         this.questionType = questionType;

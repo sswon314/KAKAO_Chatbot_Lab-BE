@@ -3,12 +3,10 @@ package com.example.goENC.controllers;
 import com.example.goENC.dto.SurveyListResponseDto;
 import com.example.goENC.dto.SurveyUpdateDto;
 import com.example.goENC.dto.survey.createSurvey.RequestCreateSurveyDto;
-import com.example.goENC.models.Survey;
+import com.example.goENC.dto.survey.reviseSurvey.RequestReviseSurveyDto;
 import com.example.goENC.services.SurveyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +21,7 @@ public class SurveyController {
     private final SurveyService surveyService;
 
     @PostMapping
-    public Integer createSurvey(@RequestBody RequestCreateSurveyDto requestDto) {
+    public Long createSurvey(@RequestBody RequestCreateSurveyDto requestDto) {
         return surveyService.createSurvey(requestDto);
     }
 
@@ -40,28 +38,28 @@ public class SurveyController {
 
     // 설문 ID에 따라 불러오기
     @GetMapping(value = "/{surveyId}")
-    public SurveyListResponseDto findBySurveyId(@PathVariable Integer surveyId) {
+    public SurveyListResponseDto findBySurveyId(@PathVariable Long surveyId) {
         return surveyService.findBySurveyId(surveyId);
     }
 
     // 설문 정보 업데이트하기
     @PutMapping(value = "/{surveyId}/meta")
-    public SurveyListResponseDto updateSurvey(@PathVariable Integer surveyId, @RequestBody SurveyUpdateDto surveyUpdateDto) {
+    public SurveyListResponseDto updateSurvey(@PathVariable Long surveyId, @RequestBody SurveyUpdateDto surveyUpdateDto) {
         return surveyService.updateSurvey(surveyId, surveyUpdateDto);
     }
 
     @PutMapping(value = "/{surveyId}/duplicate")
-    public Integer copyBySurveyId(@PathVariable Integer surveyId) {
+    public Long copyBySurveyId(@PathVariable Long surveyId) {
         return surveyService.copyBySurveyId(surveyId);
     }
 
     @PutMapping(value = "/{surveyId}/template")
-    public Integer updateSurveyTemplate(@PathVariable Integer surveyId, @RequestBody RequestCreateSurveyDto requestDto) {
-        return 1;
+    public Long reviseSurvey(@PathVariable Long surveyId, @RequestBody RequestReviseSurveyDto requestDto) {
+        return surveyService.reviseSurvey(surveyId, requestDto);
     }
 
-    @DeleteMapping(value="/{surveyId}")
-    public Integer deleteFindBySurveyId(@PathVariable Integer surveyId) {
+    @DeleteMapping(value = "/{surveyId}")
+    public Long deleteFindBySurveyId(@PathVariable Long surveyId) {
         return surveyService.deleteFindBySurveyId(surveyId);
     }
 }

@@ -8,8 +8,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ChoiceAnswerRepository extends JpaRepository<ChoiceAnswer, Integer> {
+public interface ChoiceAnswerRepository extends JpaRepository<ChoiceAnswer, Long> {
 
     @Query(value = "select * from choice_answer where question_id=:id", nativeQuery = true)
-    List<ChoiceAnswer> findAnswerList(@Param("id") Integer id);
+    List<ChoiceAnswer> findAnswerList(@Param("id") Long id);
 }

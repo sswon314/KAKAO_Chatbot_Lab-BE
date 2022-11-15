@@ -40,7 +40,7 @@ public class ResponseService {
     SubjectiveResponseRepository subjectiveResponseRepository;
 
     @Transactional(readOnly = true)
-    public ResponseSurveyDto getSurveyTemplate(Integer id) {
+    public ResponseSurveyDto getSurveyTemplate(Long id) {
         // 설문id에 대한 설문 table의 정보 가져옴
         Survey survey = surveyRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 설문이 없습니다. id=" + id));
 
@@ -48,10 +48,10 @@ public class ResponseService {
         List<Question> questionList = questionRepository.findQuestionList(id);
 
         // 객관식형 질문에 대한 답변 table의 정보리스트 가져옴
-        Map<Integer, List<ChoiceAnswer>> choiceAnswerList = new HashMap<>();
+        Map<Long, List<ChoiceAnswer>> choiceAnswerList = new HashMap<>();
         for (Question question : questionList) {
             if (question.getQuestionType() == 1) {
-                Integer questionId = question.getQuestionId();
+                Long questionId = question.getQuestionId();
                 choiceAnswerList.put(questionId, choiceAnswerRepository.findAnswerList(questionId));
             }
         }
@@ -60,7 +60,7 @@ public class ResponseService {
     }
 
     @Transactional
-    public Integer submitSurvey(RequestSubmitSurveyDto requestDto) {
+    public Long submitSurvey(RequestSubmitSurveyDto requestDto) {
         Response responseId = responseRepository.save(requestDto.toResponseEntity());
 
         for (RequestSubmitAnswerDto answer : requestDto.getQuestionCardList()) {
@@ -79,7 +79,7 @@ public class ResponseService {
     }
 
     @Transactional(readOnly = true)
-    public SurveyStatisticDto getSurveyStatistic(Integer surveyId) {
+    public SurveyStatisticDto getSurveyStatistic(Long surveyId) {
         // 1. surveyId
         // 2. surveyTitle
         // 3. surveyContent
