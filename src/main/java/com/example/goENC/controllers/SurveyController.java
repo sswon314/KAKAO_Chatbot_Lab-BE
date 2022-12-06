@@ -20,12 +20,12 @@ public class SurveyController {
     @Autowired
     private final SurveyService surveyService;
 
-    @PostMapping
+    @PostMapping()
     public Long createSurvey(@RequestBody RequestCreateSurveyDto requestDto) {
         return surveyService.createSurvey(requestDto);
     }
 
-    @GetMapping
+    @GetMapping()
     public List<SurveyListResponseDto> findAllSurveys() {
         return surveyService.findAll();
     }

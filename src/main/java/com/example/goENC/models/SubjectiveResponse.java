@@ -32,7 +32,7 @@ public class SubjectiveResponse {
     private String subjectiveAnswer;
 
     // 객관식 질문
-    @Builder
+    @Builder()
     public SubjectiveResponse(Question questionId, Response responseId, String subjectiveAnswer) {
         this.questionId = questionId;
         this.responseId = responseId;

@@ -18,7 +18,7 @@ public class UserController {
 
     private final SurveyService surveyService;
 
-    @PostMapping
+    @PostMapping()
     public Long createUser(@RequestBody UserRequestDto requestDto) {
         return userService.createUser(requestDto);
     }
