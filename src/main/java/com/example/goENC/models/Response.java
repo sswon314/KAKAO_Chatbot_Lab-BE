@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
                 "from response as r, choice_response as cr, choice_answer as ca, question as q " +
                 "where r.response_id=cr.response_id and cr.choice_answer_id=ca.choice_answer_id and ca.question_id=q.question_id and r.survey_id=:id " +
                 "group by ca.choice_answer_id,q.question_id " +
-                "order by q.question_id;",
+                "order by q.question_id,ca.choice_answer_id;",
         resultSetMapping = "statistic_choice_dto"
 )
 @SqlResultSetMapping(
